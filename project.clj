@@ -8,9 +8,15 @@
                  [net.mikera/clojure-utils "0.6.0"]
                  [net.mikera/core.matrix "0.20.0"]
               ]
-
+  
   :source-paths ["src/main/clojure"]
   :test-paths ["src/test/clojure"]
   
   :resource-paths ["src/main/resources"]
+  
+  :profiles {:dev {:resource-paths ["src/dev/resources"]
+                   :dependencies []}
+             :1.4 {:dependencies [[org.clojure/clojure "1.4.0"]]}
+             :1.5 {:dependencies [[org.clojure/clojure "1.5.1"]]}}
+
 )
