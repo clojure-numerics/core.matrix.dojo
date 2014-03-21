@@ -8,3 +8,5 @@ pom.xml
 /.project
 /target
 /.classpath
+/.lein-repl-history
+/.settings
