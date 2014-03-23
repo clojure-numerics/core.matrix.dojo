@@ -10,9 +10,18 @@ This is a simple, working project setup for core.matrix plus a few useful relate
 Instructions:
 
  - Fork the repo, so you have your own copy. A fork on GitHub is fine.
- - 
+ - Fire up the project in your favourite IDE / REPL
+ - Start hacking!
+ 
+### contributing 
+ 
+Additional contributions / PRs are welcome, providing they generally meet the following criteria
 
- ### Learning material / references
+ - Simple and clear for beginners
+ - Provide a useful illustrative example of tools or techniques
+ - Fit in with the other examples, in a ordered logical progression
+
+### Learning material / references
  
 Video from the 2013 Clojure Conj on core.matrix provides a good overview:
  
