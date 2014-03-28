@@ -10,3 +10,4 @@ pom.xml
 /.classpath
 /.lein-repl-history
 /.settings
+/.lein-failures
