@@ -2,11 +2,11 @@
   :description "FIXME: write this!"
   :url "http://example.com/FIXME"
 
-  :dependencies [[org.clojure/clojure "1.5.1"]
+  :dependencies [[org.clojure/clojure "1.6.0"]
                  
                  [org.clojure/java.jdbc "0.3.3"]
                  [net.mikera/clojure-utils "0.6.0"]
-                 [net.mikera/core.matrix "0.20.0"]
+                 [net.mikera/core.matrix "0.21.0"]
                  [net.mikera/vectorz-clj "0.20.0"]
               ]
   
