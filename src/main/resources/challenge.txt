@@ -1,0 +1,15 @@
+1. Compute stats for each team
+- % of games won (home, away, total)
+- Number of goals scored vs. number of goals conceded
+- Points scored (0 = loss, 1 = Draw, 3 = Win)
+- Which teams were better in the first half vs. second half?
+
+2. Create a 20x20 matrix of all results
+- Win / Draw / Loss for each matchup
+- Goals scored
+- Other interesting stats?
+
+3. Advanced: Time series of results (by week?)
+- Points total for each team over time
+- Ranking for each team over time
+- How did bookmaker’s odds evolve over time for each team?
