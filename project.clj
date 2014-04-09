@@ -7,7 +7,7 @@
                  [org.clojure/java.jdbc "0.3.3"]
                  [net.mikera/clojure-utils "0.6.0"]
                  [net.mikera/core.matrix "0.22.0"]
-                 [net.mikera/vectorz-clj "0.20.0"]
+                 [net.mikera/vectorz-clj "0.21.0"]
               ]
   
   :source-paths ["src/main/clojure"]
