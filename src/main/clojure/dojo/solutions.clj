@@ -1,13 +1,11 @@
 (ns dojo.solutions
   (:use clojure.core.matrix)
+  (:use clojure.core.matrix.operators)
   (:use clojure.repl)
   (:use dojo.data))
 
 ;; There is no right answer.....
 ;; But here are some suggested ideas / solutions for the challenge
-
- ;; the list of teams. We'll use this to structure most results
-(def TEAMS dojo.data/TEAMS)
 
 ;; a map of column names -> column data
 (def COLS (zipmap HEADINGS (for [h HEADINGS] (get-column RESULTS (COL-NUMS h)))))
@@ -27,7 +25,10 @@
 (esum (add HWINS AWINS DRAWS))
 ;; => 380
 
-(def HOME-WINS (mapv esum (slices (mul HWINS HOME-GAMES))))
-(def AWAY-WINS (mapv esum (slices (mul AWINS AWAY-GAMES))))
-(def DRAW-RESULTS (mapv esum (slices (add (mul DRAWS AWAY-GAMES) (mul DRAWS HOME-GAMES)))))
+;; add up results by team
+(def HOME-WINS (mapv esum (slices (* HWINS HOME-GAMES))))
+(def AWAY-WINS (mapv esum (slices (* AWINS AWAY-GAMES))))
+(def DRAW-RESULTS (mapv esum (slices (add (* DRAWS AWAY-GAMES) (* DRAWS HOME-GAMES)))))
 
+;; percentages
+(def HOME-WIN-PERCENTAGE (/ HOME-WINS 19.0)) ;; note: division of vector by a scalar
