@@ -29,6 +29,8 @@
 ;; add up results by team
 (def HOME-WINS (mapv esum (slices (* HWINS HOME-GAMES))))
 (def AWAY-WINS (mapv esum (slices (* AWINS AWAY-GAMES))))
+(def HOME-LOSSES (mapv esum (slices (* AWINS HOME-GAMES))))
+(def AWAY-LOSSES (mapv esum (slices (* HWINS AWAY-GAMES))))
 (def DRAW-RESULTS (mapv esum (slices (add (* DRAWS AWAY-GAMES) (* DRAWS HOME-GAMES)))))
 
 ;; percentages
