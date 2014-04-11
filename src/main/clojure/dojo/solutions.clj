@@ -1,6 +1,7 @@
 (ns dojo.solutions
   (:use clojure.core.matrix)
-  (:use clojure.core.matrix.operators)
+  (:refer-clojure :exclude [+ - * / == ])
+  (:require [clojure.core.matrix.operators :refer [+ - * / ==]])
   (:use clojure.repl)
   (:use dojo.data))
 
@@ -16,7 +17,7 @@
 ;; matrix of away games for each team: 1 = home game, 0 = otherwise
 (def AWAY-GAMES (vec (for [team TEAMS] (mapv #(if (= team (mget % (COL-NUMS "AwayTeam"))) 1 0) (slices RESULTS)))))
 
-;; vectors of result types for each match
+;; vectors of result types for each match 
 (def HWINS (mapv #(if (= "H" (mget % (COL-NUMS "FTR"))) 1 0) (slices RESULTS)))
 (def DRAWS (mapv #(if (= "D" (mget % (COL-NUMS "FTR"))) 1 0) (slices RESULTS)))
 (def AWINS (mapv #(if (= "A" (mget % (COL-NUMS "FTR"))) 1 0) (slices RESULTS)))
