@@ -11,8 +11,8 @@
 ;; ========================================================================
 ;; Challenge 1: computing stats for each team
 
-;; handy utility function to get a names column
 (defn col [v col-name]
+  "Utility function to extract a value from a result according to the clumn name"
   (mget v (COL-NUMS col-name)))
 
 ;; a map of column names -> column data
@@ -107,7 +107,7 @@
     HOME-GOALS
     AWAY-GOALS))
 
-;; print out the match results
+;; print out the match results as a nice table
 (comment 
   (pm MATCH-RESULTS)
 )
