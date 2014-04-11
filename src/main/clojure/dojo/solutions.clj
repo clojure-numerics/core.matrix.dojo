@@ -8,19 +8,26 @@
 ;; There is no right answer.....
 ;; But here are some suggested ideas / solutions for the challenge
 
+;; ========================================================================
+;; Challenge 1: computing stats for each team
+
+;; handy utility function to get a names column
+(defn col [v col-name]
+  (mget v (COL-NUMS col-name)))
+
 ;; a map of column names -> column data
 (def COLS (zipmap HEADINGS (for [h HEADINGS] (get-column RESULTS (COL-NUMS h)))))
 
 ;; matrix of home games for each team: 1 = home game, 0 = otherwise
-(def HOME-GAMES (vec (for [team TEAMS] (mapv #(if (= team (mget % (COL-NUMS "HomeTeam"))) 1 0) (slices RESULTS)))))
+(def HOME-GAMES (vec (for [team TEAMS] (mapv #(if (= team (col % "HomeTeam")) 1 0) (slices RESULTS)))))
 
 ;; matrix of away games for each team: 1 = home game, 0 = otherwise
-(def AWAY-GAMES (vec (for [team TEAMS] (mapv #(if (= team (mget % (COL-NUMS "AwayTeam"))) 1 0) (slices RESULTS)))))
+(def AWAY-GAMES (vec (for [team TEAMS] (mapv #(if (= team (col % "AwayTeam")) 1 0) (slices RESULTS)))))
 
 ;; vectors of result types for each match 
-(def HWINS (mapv #(if (= "H" (mget % (COL-NUMS "FTR"))) 1 0) (slices RESULTS)))
-(def DRAWS (mapv #(if (= "D" (mget % (COL-NUMS "FTR"))) 1 0) (slices RESULTS)))
-(def AWINS (mapv #(if (= "A" (mget % (COL-NUMS "FTR"))) 1 0) (slices RESULTS)))
+(def HWINS (mapv #(if (= "H" (col % "FTR")) 1 0) (slices RESULTS)))
+(def DRAWS (mapv #(if (= "D" (col % "FTR")) 1 0) (slices RESULTS)))
+(def AWINS (mapv #(if (= "A" (col % "FTR")) 1 0) (slices RESULTS)))
 
 ;; check we have captured all games
 (esum (add HWINS AWINS DRAWS))
@@ -35,3 +42,78 @@
 
 ;; percentages
 (def HOME-WIN-PERCENTAGE (/ HOME-WINS 19.0)) ;; note: division of vector by a scalar
+
+;; wins, draws, losses for each team
+(def TEAM-RESULTS
+  (transpose [(+ HOME-WINS AWAY-WINS) DRAW-RESULTS (+ HOME-LOSSES AWAY-LOSSES)]))
+
+;; end of season points for each team (3 = win, 1 = draw, 0 = loss)
+(def TEAM-POINTS 
+  (inner-product TEAM-RESULTS [3 1 0]))
+
+;; create a sorted league table
+(def LEAGUE-TABLE
+  (sort-by #(- (second %)) (zipmap TEAMS TEAM-POINTS)))
+
+;; Should match the Pts results at:
+;;   http://en.wikipedia.org/wiki/2012%E2%80%9313_Premier_League
+
+;; pretty-print the results
+(comment 
+  (pm LEAGUE-TABLE)
+)
+;; ========================================================================
+;; Challenge 2: matrices of results
+
+;; create a sorted map of TeamName -> team number (for array indexing)
+(def TEAM-NUMS 
+  (into (sorted-map) (zipmap TEAMS (range))))
+
+;; 20x20 matrix of goals for home team
+(def HOME-GOALS
+  (reduce 
+    (fn [m v] 
+      (mset m 
+            (TEAM-NUMS (col v "HomeTeam")) 
+            (TEAM-NUMS (col v "AwayTeam"))
+            (read-string (col v "FTHG")))) 
+    (zero-matrix 20 20)
+    (slices RESULTS)))
+
+;; 20x20 matrix of goals for away team
+(def AWAY-GOALS
+  (reduce 
+    (fn [m v] 
+      (mset m 
+            (TEAM-NUMS (col v "HomeTeam")) 
+            (TEAM-NUMS (col v "AwayTeam"))
+            (read-string (col v "FTAG")))) 
+    (array (repeat 20 (repeat 20 "-")))
+    (slices RESULTS)))
+
+(defn match-result 
+  "Helper function to calculate the result of a match, given home goals and away goals"
+  ([hg ag]
+      (cond 
+        (or (string? hg) (string? ag)) "-"
+        (> hg ag) "W"
+        (< hg ag) "L"
+        :else "D")))
+
+;; use 'emap' compare these element-by-element to get 20x20 matrix of match results
+(def MATCH-RESULTS
+  (emap 
+    match-result
+    HOME-GOALS
+    AWAY-GOALS))
+
+;; print out the match results
+(comment 
+  (pm MATCH-RESULTS)
+)
+
+
+;; ========================================================================
+;; Challenge 3: time series
+
+;; TODO
