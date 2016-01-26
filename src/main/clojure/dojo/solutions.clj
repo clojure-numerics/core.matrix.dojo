@@ -8,6 +8,8 @@
 ;; There is no right answer.....
 ;; But here are some suggested ideas / solutions for the challenge
 
+(defn sols [] 
+
 ;; ========================================================================
 ;; Challenge 1: computing stats for each team
 
@@ -108,10 +110,9 @@
     AWAY-GOALS))
 
 ;; print out the match results as a nice table
-(comment 
-  (pm MATCH-RESULTS)
-)
+(pm MATCH-RESULTS)
 
+)
 
 ;; ========================================================================
 ;; Challenge 3: time series

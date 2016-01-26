@@ -2,15 +2,17 @@
   :description "FIXME: write this!"
   :url "http://example.com/FIXME"
 
-  :dependencies [[org.clojure/clojure "1.6.0"]   ;; Clojure iteself
+  :dependencies [[org.clojure/clojure "1.8.0"]   ;; Clojure iteself
                  
-                 [net.mikera/core.matrix "0.22.0"]  ;; core.matrix
-                 [net.mikera/vectorz-clj "0.21.0"]  ;; vectorz-clj implementation
+                 [net.mikera/core.matrix "0.49.0"]  ;; core.matrix
+                 [net.mikera/vectorz-clj "0.41.0"]  ;; vectorz-clj implementation
 
-                 [org.clojure/java.jdbc "0.3.3"]   ;; for JDBC database access
-                 [org.clojure/data.csv "0.1.2"]    ;; for CSV loading etc
+                 [org.clojure/java.jdbc "0.4.2"]   ;; for JDBC database access
+                 [org.clojure/data.csv "0.1.3"]    ;; for CSV loading etc
                  
-                 [net.mikera/clojure-utils "0.6.0"] ;; various utility functions
+                 [incanter "1.9.1-SNAPSHOT"]
+                 
+                 [net.mikera/clojure-utils "0.6.2"] ;; various utility functions
               ]
   
   :source-paths ["src/main/clojure"]
@@ -19,8 +21,7 @@
   :resource-paths ["src/main/resources"]
   
   :profiles {:dev {:resource-paths ["src/dev/resources"]
-                   :dependencies []}
-             :1.4 {:dependencies [[org.clojure/clojure "1.4.0"]]}
-             :1.5 {:dependencies [[org.clojure/clojure "1.5.1"]]}}
+                   :dependencies [[net.mikera/cljunit "0.3.1"]]
+                   :java-source-paths ["src/test/java"]}}
 
 )
