@@ -14,7 +14,7 @@
 ;; Challenge 1: computing stats for each team
 
 (defn col [v col-name]
-  "Utility function to extract a value from a result according to the clumn name"
+  "Utility function to extract a value from a result according to the column name"
   (mget v (COL-NUMS col-name)))
 
 ;; a map of column names -> column data
