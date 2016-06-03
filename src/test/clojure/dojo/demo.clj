@@ -1,6 +1,6 @@
 (ns dojo.demo
   (:use [clojure.core.matrix])
-  (:use [clojure.core.matrix.stats :as stats])
+  (:require [clojure.core.matrix.stats :as stats])
   (:use [clojure.repl])
   (:require [clojure.data.csv :as csv])
   (:require [clojure.java.io :as io])
